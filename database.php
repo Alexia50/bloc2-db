@@ -13,22 +13,39 @@ class Database
     */
     public function connect(string $db,string $user='root',string $password=''):PDO
     {
-    $this->pdo = new PDO() (dsn:"mysql:host=localhost;dbname=$db",$user, $password);
-    $this->pdo->setAttribute(PDO::ATTR_ERRMODE,  PDO::ERRMODE_EXCEPTION);
-    return $this->pdo;
+        $this->pdo = new PDO ("mysql:host=localhost;dbname=$db",$user, $password);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE,  PDO::ERRMODE_EXCEPTION);
+        return $this->pdo;
     }
     public function deleteFrom(string $table,string $condition){
-    $sql="DELETE FROM '$table' WHERE $condition";
-    return $this->pdo->exec($sql);
+        $sql="DELETE FROM '$table' WHERE $condition";
+        return $this->pdo->exec($sql);
     }
-    public function insert( String $tableName,array $fieldValues):int{
 
+    /**
+     * Adds a new row in tableName
+     * @param String $tableName The table name
+     * @param array $fieldValues An associative array of field names and values
+     * i.e. ['name' =>'Smith','age',=>20,'active'=>true]
+     * @return int
+     */
+
+    public function insert( String $tableName,array $fieldValues):int{
+        $fieldNamesStr='';
+        $fieldValuesStr='';
+        foreach ($fieldValues as $fieldName=>$fieldValue){
+            $fieldNamesStr.="`$fieldName`,";
+            $fieldValuesStr.="`$fieldValue`,";
+        }
+        $fieldNamesStr=rtrim($fieldNamesStr,',');
+        $fieldValuesStr=rtrim($fieldValuesStr,',');
+        $sql="INSERT INTO `$tableName`($fieldNamesStr) VALUES ($fieldValuesStr)";
+        return $this->pdo->exec($sql);
     }
     public function update(String $tableName, array $fieldValues,array $keyValues):int{
-
+        return $this->pdo->exec($sql);
     }
     public function query(String $sql):PDOStatement{
-
+        return $this->pdo->query($sql);
     }
 }
-?>

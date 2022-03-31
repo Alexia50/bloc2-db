@@ -1,14 +1,23 @@
 <?php
-include_once 'src/database.php';
+include_once 'database.php';
 
 $db=new Database();
-$pdo=$db->connect(db:'groups');
+$db->connect(db:'groups');
 
 
-$st=$pdo->query('SELECT COUNT(*) FROM 'User' ');
+$st=$db->query('SELECT COUNT(*) FROM `User` ');
 echo $st-> fetchColumn(0);
 echo "<hr>";
-$st
+$db->insert("User")
+$st=$db->query('SELECT * FROM `User`');
+foreach ($st as $row){
+    echo $row['firstname']."<br>";
+}
+/*
+while($row=$st->fetch()){
+    echo $row[1]."<br>";
+}
+*/
 
 
 
@@ -19,5 +28,5 @@ if (isset($_GET['delete'])){
 
 }
 echo "<hr>";
-$st=$db->query('SELECT COUNT(*) FROM 'User' where suspended');
+$st=$db->query('SELECT COUNT(*) FROM `User` where suspended');
 echo $st->fetchColumn(0);
