@@ -1,11 +1,16 @@
 <?php
 include_once 'src/database.php';
 
-$db=dbConnect('groups');
-$db->ex
-$st=$db->query('SELECT COUNT(*) FROM 'User' ');
+$db=new Database();
+$pdo=$db->connect(db:'groups');
+
+
+$st=$pdo->query('SELECT COUNT(*) FROM 'User' ');
 echo $st-> fetchColumn(0);
 echo "<hr>";
+$st
+
+
 
 if (isset($_GET['delete'])){
     $delete=$_GET['delete'];

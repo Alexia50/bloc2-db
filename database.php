@@ -27,5 +27,8 @@ class Database
     public function update(String $tableName, array $fieldValues,array $keyValues):int{
 
     }
+    public function query(String $sql):PDOStatement{
+
+    }
 }
 ?>
