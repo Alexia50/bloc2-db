@@ -5,7 +5,8 @@ $db=new Database();
 $db->connect(db:'groups');
 
 
-$st=$db->query('SELECT COUNT(*) FROM `User` ');
+$db->insert("organisation",['name=>'CaenSup','domain'=>'Caensup'');
+
 echo $st-> fetchColumn(0);
 echo "<hr>";
 $db->insert("User")

@@ -40,8 +40,17 @@ class Database
         $fieldNamesStr=rtrim($fieldNamesStr,',');
         $fieldValuesStr=rtrim($fieldValuesStr,',');
         $sql="INSERT INTO `$tableName`($fieldNamesStr) VALUES ($fieldValuesStr)";
-        return $this->pdo->exec($sql);
+        this->pdo->exec($sql);
+        return $this->pdo->LastInsertID();
     }
+
+    /**
+     * Updates a row in $tableName.
+     * @param String $tableName The table name
+     * @param array $fieldValues The new field values
+     * @param array $keyValues La valeur(s) de(s) champ(s) clé(s)
+     * @return int
+     */
     public function update(String $tableName, array $fieldValues,array $keyValues):int{
         return $this->pdo->exec($sql);
     }
